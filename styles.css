@@ -1,0 +1,29 @@
+body, html {
+    background-color: rgb(59, 59, 62);
+    color: rgb(149, 147, 143);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    background-color: rgb(48, 45, 45);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+#weather_img {
+    display: none;
+}
+
+img {
+    height: 100px;
+}
+
+#text {
+    padding: 0;
+    margin: 0;
+}
