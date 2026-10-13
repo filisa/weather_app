@@ -23,7 +23,7 @@ img {
     height: 100px;
 }
 
-#text {
-    padding: 0;
+p {
+    padding: 2vw;
     margin: 0;
 }

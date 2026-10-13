@@ -2,54 +2,73 @@
 const sthlmWeather = document.getElementById("sthlm_weather")
 const text = document.getElementById("text")
 const weatherImgDiv =  document.getElementById("weather_img")
+const shortDescription =  document.getElementById("short_description")
+
 
 sthlmWeather.addEventListener("click", async function(){
-    const temperature = await getWeatherData();
-    text.textContent= `The current temperature in Sthlm is ${temperature}° Celsius`;
-    isItCloudy()
+    await getData()
 })
 
-async function getWeatherData() {
-  const url = "https://api.open-meteo.com/v1/forecast?latitude=59.3021336&longitude=18.083144&models=metno_seamless&current=temperature_2m&forecast_days=1";
+
+async function getData() {
+      const url = "https://api.open-meteo.com/v1/forecast?latitude=59.91&longitude=10.75&models=metno_seamless&current=temperature_2m,cloud_cover&forecast_days=1";
   try {
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
-
     const result = await response.json();
-    console.log(`The current temperature in Sthlm is ${result.current.temperature_2m} Celsius`);
-    const weather = result.current.temperature_2m;
-    return weather;
+    const temperature = result.current.temperature_2m
+    const cloudCover = result.current.cloud_cover
+    renderData(temperature,cloudCover);
+    text.textContent= `The current temperature in Sthlm is ${temperature}° Celsius and the cloud coverage is ${cloudCover}%`;
   } catch (error) {
     console.error(error.message);
   }
 }
 
-async function isItCloudy() {
-   
-  const url = "https://api.open-meteo.com/v1/forecast?latitude=59.3021336&longitude=18.083144&models=metno_seamless&current=cloud_cover&forecast_days=1";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+
+
+
+
+function renderData(temperature,cloudCover) { 
+    switch (true) {
+      case temperature<=0:
+        console.log("Frost")
+        shortDescription.textContent = "Frost. "
+        break;
+      case temperature > 0 && temperature < 15:
+        console.log("It's cold")
+        shortDescription.textContent = "It's cold. "
+        break;
+      case temperature > 15 && temperature < 25:
+          console.log("It's lagom")
+          shortDescription.textContent = "It's lagom. "
+          break;
+      case temperature >= 25:
+          console.log("It's warm")
+          shortDescription.textContent = "It's warm. "
+          break;
+      default: 
+        console.log("No temperature data. ")
     }
 
-    const result = await response.json();
-    console.log(`The cloud coverage is ${result.current.cloud_cover}`);
-    const cloudCoverage = result.current.cloud_cover;
-    if (cloudCoverage >= 70) {
-        console.log("very cloudy")
-        weatherImgDiv.style.display = 'block';
-    } else if (cloudCoverage > 30 && cloudCoverage < 70) {
-      console.log('a bit cloudy')
-    } else if (cloudCoverage<20) {
-      console.log('clear')
-    } else { 
-      console.log("error")
-    }
-  } catch (error) {
-    console.error(error.message);
+    switch(true) {
+      case cloudCover >= 70:
+        console.log("Cloudy")
+        shortDescription.textContent += "Cloudy"
+        break;
+      case cloudCover < 70 && cloudCover >= 30:
+        console.log("Partially cloudy")
+        shortDescription.textContent += "Partially cloudy"
+        break;
+      case cloudCover < 30:
+        console.log("Clear")
+        shortDescription.textContent += "Clear"
+        break;
+      default: 
+        console.log("No cloud cover data. ")
+
+    } 
   }
-}
 
