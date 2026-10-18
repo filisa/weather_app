@@ -6,6 +6,8 @@
 		<title>Weather App</title>
 		<meta name="description" content="Weather app homepage" />
 		<link rel="stylesheet" href="styles.css" />
+		<script type="module" src="script.js" defer></script>
+		<script type="module" src="dropdown.js" defer></script>
 	</head>
 	<body>
 		<main>
@@ -16,7 +18,12 @@
 			</div>
 			<p id="text"></p>
 			<p id="short_description"></p>
+			<div class="dropdown" id="dropdown">
+				<input class="input" id="input_field" type="text">
+				<div class="cities" id="cities_list"></div>
+				</input>
+			</div>
 		</main>
-		<script src="script.js"></script>
+		<footer>Made by © Margarita Nikulina | 2026</footer>
 	</body>
 </html>
