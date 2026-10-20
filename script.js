@@ -60,7 +60,6 @@ function buildCitiesList() {
 	for (let i = 0; i < cities.length; i++) {
 		const cityId = cities[i].city.replace(/\s+/g, "-");
 		const el = document.querySelector(`#${CSS.escape(cityId)}`);
-		console.log(el);
 		el.addEventListener("click", async function () {
 			inputField.placeholder = cities[i].city;
 			await sendAnApiCallForSpecificCity(cities[i]);
