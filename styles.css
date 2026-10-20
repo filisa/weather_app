@@ -71,12 +71,19 @@ footer {
 	border: 2px solid purple;
 	background-color: rgba(216, 132, 206, 0.289);
 	caret-color: transparent;
+	background-image: url("images/search.svg");
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
 }
 
 .input::placeholder {
 	color: black;
 	font-weight: 900;
 	text-align: center;
+}
+
+.input:focus {
+	border: 2px solid purple;
 }
 
 .cities {

@@ -27,10 +27,6 @@ inputField.addEventListener("click", (event) => {
 	}
 });
 
-inputField.addEventListener("input", (event) => {
-	citiesList.style.display = "block";
-});
-
 async function getData() {
 	const url =
 		"https://api.open-meteo.com/v1/forecast?latitude=59.91&longitude=10.75&models=metno_seamless&current=temperature_2m,cloud_cover&forecast_days=1";
@@ -66,6 +62,11 @@ function buildCitiesList() {
 		el.addEventListener("click", async function () {
 			inputField.placeholder = cities[i].city;
 			await sendAnApiCallForSpecificCity(cities[i]);
+			if (citiesList.style.display == "block") {
+				citiesList.style.display = "none";
+			} else {
+				citiesList.style.display = "block";
+			}
 		});
 	}
 }
