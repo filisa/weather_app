@@ -70,6 +70,7 @@ footer {
 	border-radius: 10px 10px 0 0;
 	border: 2px solid purple;
 	background-color: rgba(216, 132, 206, 0.289);
+	caret-color: transparent;
 }
 
 .input::placeholder {

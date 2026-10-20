@@ -5,7 +5,6 @@ const inputField = document.getElementById("input_field");
 const dropdown = document.getElementById("dropdown");
 const citiesList = document.getElementById("cities_list");
 const text = document.getElementById("text");
-const weatherImgDiv = document.getElementById("weather_img");
 const shortDescription = document.getElementById("short_description");
 
 if (sthlmWeather) {
@@ -16,12 +15,16 @@ if (sthlmWeather) {
 
 buildCitiesList();
 
-dropdown.addEventListener("pointerleave", (event) => {
-	citiesList.style.display = "none";
-});
+// dropdown.addEventListener("pointerclickleave", (event) => {
+// 	citiesList.style.display = "none";
+// });
 
-inputField.addEventListener("pointerenter", (event) => {
-	citiesList.style.display = "block";
+inputField.addEventListener("click", (event) => {
+	if (citiesList.style.display == "block") {
+		citiesList.style.display = "none";
+	} else {
+		citiesList.style.display = "block";
+	}
 });
 
 inputField.addEventListener("input", (event) => {
