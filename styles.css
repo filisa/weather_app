@@ -50,9 +50,6 @@ footer {
 	font-size: 0.9rem;
 }
 
-/* //// */
-/* //// */
-/* //// */
 /* dropdown */
 .dropdown {
 	background-color: rgba(240, 248, 255, 0);
@@ -64,16 +61,18 @@ footer {
 
 .input {
 	margin: 0;
-	padding: 0;
 	padding: 2vw;
 	font-size: 2rem;
 	border-radius: 10px 10px 0 0;
 	border: 2px solid purple;
 	background-color: rgba(216, 132, 206, 0.289);
-	caret-color: transparent;
+	caret-color: black;
 	background-image: url("images/search.svg");
-	background-position: 10px 10px;
+	background-position: left;
+	background-position-x: -1%;
+	background-size: 2rem;
 	background-repeat: no-repeat;
+	cursor: pointer;
 }
 
 .input::placeholder {

@@ -2,7 +2,6 @@ import { cities } from "./data.js";
 
 const sthlmWeather = document.getElementById("sthlm_weather");
 const inputField = document.getElementById("input_field");
-const dropdown = document.getElementById("dropdown");
 const citiesList = document.getElementById("cities_list");
 const text = document.getElementById("text");
 const shortDescription = document.getElementById("short_description");
@@ -15,16 +14,35 @@ if (sthlmWeather) {
 
 buildCitiesList();
 
-// dropdown.addEventListener("pointerclickleave", (event) => {
-// 	citiesList.style.display = "none";
-// });
-
+//if you click the dropdown shows
 inputField.addEventListener("click", (event) => {
 	if (citiesList.style.display == "block") {
 		citiesList.style.display = "none";
 	} else {
 		citiesList.style.display = "block";
 	}
+});
+
+//if you start typing in input field it will start looking for cities
+inputField.addEventListener("input", (event) => {
+	setTimeout(() => {
+		let userInput = inputField.textContent;
+		const myHeaders = new Headers();
+		myHeaders.append("x-api-key", "eImgmWXO49PJoIEITyiD3JeYeemU8iiPPqZwZ2tZ");
+
+		const requestOptions = {
+			method: "GET",
+			headers: myHeaders,
+			redirect: "follow",
+		};
+		fetch(`https://api.api-ninjas.com/v1/geocoding?city=${userInput}`)
+			.then((response) => response.text())
+			.then((result) => console.log(result))
+			.catch((error) => console.error(error));
+
+		console.log(response.latitude);
+		return `Latitude: response.latitude , longitude: response.longitude `;
+	}, 1000);
 });
 
 async function getData() {
@@ -94,7 +112,7 @@ function renderData(temperature, cloudCover) {
 			console.log("Frost");
 			shortDescription.textContent = "Frost. ";
 			break;
-		case temperature > 0 && temperature < 15:
+		case temperature > 0 && temperature <= 15:
 			console.log("It's cold");
 			shortDescription.textContent = "It's cold. ";
 			break;
