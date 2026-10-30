@@ -81,5 +81,4 @@ logged to the browser console.
 
 ## License
 
-No license has been chosen for this project yet. To let others use the code,
-consider adding one, for example [MIT](https://choosealicense.com/licenses/mit/).
+https://creativecommons.org/licenses/by-nc/4.0/
