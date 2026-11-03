@@ -22,14 +22,6 @@ h1 {
 	font-size: 3rem;
 }
 
-button {
-	background-color: rgb(48, 45, 45);
-	border: none;
-	color: white;
-	padding: 10px;
-	border-radius: 20px;
-}
-
 #weather_img {
 	display: none;
 }
@@ -61,24 +53,34 @@ footer {
 
 .input {
 	margin: 0;
-	padding: 2vw;
+	padding: 20px;
 	font-size: 2rem;
-	border-radius: 10px 10px 0 0;
+	border-radius: 10px;
 	border: 2px solid purple;
 	background-color: rgba(216, 132, 206, 0.289);
-	caret-color: black;
-	background-image: url("images/search.svg");
-	background-position: left;
-	background-position-x: -1%;
-	background-size: 2rem;
-	background-repeat: no-repeat;
 	cursor: pointer;
+	width: 500px;
+}
+
+button {
+	width: 33vw;
+	font-size: 1.5rem;
+	margin: 2vw;
+	background-color: rgba(216, 132, 206, 0.738);
+	border: 2px solid purple;
+	color: rgb(37, 33, 33);
+	padding: 20px;
+	border-radius: 10px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button:hover {
+	background-color: rgba(213, 119, 202, 0.918);
+	font-size: 1.7rem;
 }
 
 .input::placeholder {
-	color: black;
-	font-weight: 900;
-	text-align: center;
+	color: rgb(107, 97, 97);
 }
 
 .input:focus {
@@ -114,4 +116,19 @@ li:hover {
 #text,
 #short_description {
 	font-size: 2rem;
+}
+
+.weather_div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 4vw;
+}
+
+.card {
+	width: 20vw;
+	height: 20vw;
+	font-size: 2rem;
+	background-color: #e66465;
+	border-radius: 20px;
 }

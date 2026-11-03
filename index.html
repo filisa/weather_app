@@ -9,24 +9,28 @@
 		<link rel="stylesheet" href="styles.css" />
 		<link rel="icon" href="images/cloudy.svg" />
 		<script type="module" src="script.js" defer></script>
+		<script type="text/javascript" src="codes.json"></script>
 	</head>
 	<body>
 		<main>
 			<h1>Weather App</h1>
 			<div class="dropdown" id="dropdown">
 				<input
+					autofocus
 					class="input"
 					id="input_field"
 					type="text"
-					placeholder="Choose your city"
+					placeholder="🔎 Choose your city"
 				/>
-				<div class="cities" id="cities_list"></div>
 			</div>
-			<div id="weather_img">
-				<img src="images/cloudy.svg" />
-			</div>
+			<button id="search">Search</button>
 			<p id="text"></p>
 			<p id="short_description"></p>
+			<div id="weather_div" class="weather_div">
+				<div id="weather_condition" class="card"></div>
+				<div id="temperature" class="card"></div>
+				<div id="wind" class="card"></div>
+			</div>
 		</main>
 		<footer>Made by © Margarita Nikulina | 2026</footer>
 	</body>
