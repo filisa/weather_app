@@ -3,6 +3,8 @@ const inputField = document.getElementById("input_field");
 const text = document.getElementById("text");
 const shortDescription = document.getElementById("short_description");
 const search = document.getElementById("search");
+const weatherConditionDiv = document.getElementById("weather_condition");
+
 if (sthlmWeather) {
 	sthlmWeather.addEventListener("click", async function () {
 		await getData();
@@ -46,7 +48,12 @@ async function sendAnApiCallForSpecificCity(latitude, longitude) {
 		const weatherCondition = await getWeatherByCode(
 			result.current.weather_code
 		);
-		renderData(temperature, cloudCover, weatherCondition);
+		renderData(
+			temperature,
+			cloudCover,
+			result.current.weather_code,
+			weatherCondition
+		);
 		console.log(weatherCondition);
 		text.textContent = `The current temperature in ${inputField.value} is ${temperature}° Celsius and the cloud coverage is ${cloudCover}%. ${weatherCondition}`;
 	} catch (error) {
@@ -54,15 +61,21 @@ async function sendAnApiCallForSpecificCity(latitude, longitude) {
 	}
 }
 
-function renderData(temperature, cloudCover, weatherCondition) {
-	switch (true) {
-		case temperature > 0 && temperature <= 15:
+function renderData(temperature, cloudCover, weatherCode, weatherCondition) {
+	const image = document.createElement("img");
+	image.classList.add("weather_image");
+	const text = document.createElement("span");
+	text.classList.add("text");
+	weatherConditionDiv.appendChild(image);
+	text.textContent = weatherCondition;
+	weatherConditionDiv.appendChild(text);
+	switch (weatherCode) {
+		case 0:
+		case 1:
+			image.src = "images/sun.svg";
 			break;
-		case temperature > 15 && temperature < 25:
-			break;
-		case temperature >= 25 && temperature < 35:
-			break;
-		case temperature >= 35:
+		case 51:
+			image.src = "images/rainy.svg";
 			break;
 		default:
 			console.log("No weather data. ");

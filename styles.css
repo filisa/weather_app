@@ -132,3 +132,11 @@ li:hover {
 	background-color: #e66465;
 	border-radius: 20px;
 }
+
+.weather_image {
+	height: 90%;
+}
+
+.text {
+	font-size: 0.5rem;
+}
