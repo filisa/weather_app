@@ -15,35 +15,33 @@ if (sthlmWeather) {
 buildCitiesList();
 
 //if you click the dropdown shows
-inputField.addEventListener("click", (event) => {
-	if (citiesList.style.display == "block") {
-		citiesList.style.display = "none";
-	} else {
-		citiesList.style.display = "block";
+// inputField.addEventListener("click", (event) => {
+// 	if (citiesList.style.display == "block") {
+// 		citiesList.style.display = "none";
+// 	} else {
+// 		citiesList.style.display = "block";
+// 	}
+// });
+
+//if you start typing in input field it will start looking for cities
+inputField.addEventListener("keydown", async function (event) {
+	let userInput = inputField.value;
+	if (event.code === "Enter") {
+		getData2();
 	}
 });
 
-//if you start typing in input field it will start looking for cities
-inputField.addEventListener("input", (event) => {
-	setTimeout(() => {
-		let userInput = inputField.textContent;
-		const myHeaders = new Headers();
-		myHeaders.append("x-api-key", "eImgmWXO49PJoIEITyiD3JeYeemU8iiPPqZwZ2tZ");
-
-		const requestOptions = {
-			method: "GET",
-			headers: myHeaders,
-			redirect: "follow",
-		};
-		fetch(`https://api.api-ninjas.com/v1/geocoding?city=${userInput}`)
-			.then((response) => response.text())
-			.then((result) => console.log(result))
-			.catch((error) => console.error(error));
-
-		console.log(response.latitude);
-		return `Latitude: response.latitude , longitude: response.longitude `;
-	}, 1000);
-});
+async function getData2() {
+	const url = "http://www.gps-coordinates.net/api/london";
+	try {
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Response status: ${response.status}`);
+		}
+	} catch (error) {
+		console.error(error.message);
+	}
+}
 
 async function getData() {
 	const url =
