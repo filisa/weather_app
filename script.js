@@ -7,6 +7,8 @@ const windDiv = document.getElementById("wind");
 const dropdownSuggestionsDiv = document.getElementById(
 	"dropdown_suggestions_div"
 );
+const main = document.getElementById("main");
+
 const loader = document.getElementById("loader");
 loader.classList.add("hidden");
 weatherDiv.classList.add("hidden");
@@ -16,6 +18,10 @@ let delayForTyping;
 //if you start typing in input field it will start looking for cities
 inputField.addEventListener("input", async function () {
 	clearTimeout(delayForTyping);
+	const errorMessage = document.querySelector(".error-message");
+	if (errorMessage) {
+		main.removeChild(errorMessage);
+	}
 	weatherDiv.classList.add("hidden");
 	delayForTyping = setTimeout(async () => {
 		if (inputField.value.length === 0) {
@@ -23,12 +29,26 @@ inputField.addEventListener("input", async function () {
 			return;
 		}
 		loader.classList.remove("hidden");
-		const cities = await searchCity();
-		showDropdownList(cities);
+		try {
+			const cities = await searchCity();
+			if (cities) {
+				showDropdownList(cities);
+			} else {
+				dropdownSuggestionsDiv.textContent = "Nothing found, try again.";
+			}
+		} catch {
+			renderErrorMessage();
+		}
 		loader.classList.add("hidden");
 	}, 400);
 });
 
+function renderErrorMessage() {
+	const errorMessage = document.createElement("span");
+	errorMessage.textContent = "Error: something went wrong, try again";
+	errorMessage.classList.add("error-message");
+	main.appendChild(errorMessage);
+}
 function showDropdownList(citiesList) {
 	dropdownSuggestionsDiv.classList.remove("hidden");
 	dropdownSuggestionsDiv.textContent = "";
@@ -47,15 +67,13 @@ async function searchCity() {
 		const response = await fetch(url);
 
 		if (!response.ok) {
+			console.log("response not ok");
 			throw new Error(`Response status: ${response.status}`);
 		}
 		const result = await response.json();
-		if (!result.results) {
-			dropdownSuggestionsDiv.textContent = "error! nothing found";
-		}
 		return result.results;
 	} catch (error) {
-		console.error(error.message);
+		console.error("No response");
 		throw error;
 	}
 }
