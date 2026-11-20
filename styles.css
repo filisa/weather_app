@@ -137,6 +137,7 @@ footer {
 	border: none;
 	padding: 0.4vw;
 	background-color: #e6646400;
+	color: black;
 	width: 80%;
 	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
 }
