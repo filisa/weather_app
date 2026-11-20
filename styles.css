@@ -161,3 +161,76 @@ footer {
 .temperature_info {
 	font-size: 3.5rem;
 }
+<<<<<<< Updated upstream
+=======
+
+.dropdown_suggestions_div {
+	height: fit-content;
+	background-color: #9198e5;
+	border: 1px solid rgb(150, 146, 166);
+	padding: 1vw 0vw;
+	border-radius: 0 0 30px 30px;
+	color: rgb(32, 31, 31);
+	margin: 0;
+	width: 90vw;
+}
+
+.city_button {
+	border: none;
+	padding: 0.4vw;
+	background-color: #e6646400;
+	color: #1e1e20;
+	width: 80%;
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
+}
+
+.city_button:hover {
+	background-color: #e6646460;
+}
+
+.loader {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	width: 20vw;
+	animation-name: "spinningLoader";
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes spinningLoader {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* mobile */
+@media (max-width: 450px) {
+	.city_button {
+		font-size: 1.5rem;
+	}
+	.weather_image {
+		height: 16vw;
+	}
+
+	.wind_info {
+		font-size: 1rem;
+	}
+
+	.temperature_info {
+		font-size: 1rem;
+	}
+	.text {
+		font-size: 1rem;
+	}
+}
+
+.error-message {
+	font-size: 1rem;
+	color: red;
+}
+>>>>>>> Stashed changes
