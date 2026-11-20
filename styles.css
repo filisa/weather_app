@@ -74,10 +74,10 @@ button {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button:hover {
+/* button:hover {
 	background-color: rgba(213, 119, 202, 0.918);
 	font-size: 1.7rem;
-}
+} */
 
 .input::placeholder {
 	color: rgb(107, 97, 97);
@@ -115,7 +115,7 @@ li:hover {
 
 #text,
 #short_description {
-	font-size: 2rem;
+	font-size: 1rem;
 }
 
 .weather_div {
@@ -123,14 +123,21 @@ li:hover {
 	flex-direction: row;
 	justify-content: space-between;
 	gap: 4vw;
+	color: rgb(46, 44, 68);
 }
 
 .card {
+	padding: 2vw;
+	display: flex;
+	flex-direction: column;
 	width: 20vw;
 	height: 20vw;
 	font-size: 2rem;
-	background-color: #e66465;
+	background-color: #e464e6;
 	border-radius: 20px;
+	justify-content: center;
+	align-items: center;
+	color: rgb(46, 44, 68);
 }
 
 .weather_image {
@@ -138,5 +145,19 @@ li:hover {
 }
 
 .text {
-	font-size: 0.5rem;
+	font-size: 1rem;
+}
+footer {
+	margin-top: 10vw;
+}
+.hidden {
+	display: none;
+}
+
+.wind_info {
+	font-size: 3.5rem;
+}
+
+.temperature_info {
+	font-size: 3.5rem;
 }
