@@ -7,7 +7,8 @@ const windDiv = document.getElementById("wind");
 const dropdownSuggestionsDiv = document.getElementById(
 	"dropdown_suggestions_div"
 );
-
+const loader = document.getElementById("loader");
+loader.classList.add("hidden");
 weatherDiv.classList.add("hidden");
 dropdownSuggestionsDiv.classList.add("hidden");
 let delayForTyping;
@@ -15,19 +16,26 @@ let delayForTyping;
 //if you start typing in input field it will start looking for cities
 inputField.addEventListener("input", async function () {
 	clearTimeout(delayForTyping);
+	weatherDiv.classList.add("hidden");
 	delayForTyping = setTimeout(async () => {
 		if (inputField.value.length === 0) {
 			//add warning message here 'enter the name of the city first!
 			return;
 		}
+		loader.classList.remove("hidden");
 		const cities = await searchCity();
 		showDropdownList(cities);
+		loader.classList.add("hidden");
 	}, 400);
 });
 
 function showDropdownList(citiesList) {
 	dropdownSuggestionsDiv.classList.remove("hidden");
 	dropdownSuggestionsDiv.textContent = "";
+	if (!citiesList) {
+		dropdownSuggestionsDiv.textContent = "Nothing found, try again.";
+		loader.classList.add("hidden");
+	}
 	citiesList.forEach((item) => {
 		createSearchResult(item);
 	});
@@ -36,14 +44,12 @@ function showDropdownList(citiesList) {
 async function searchCity() {
 	const url = `https://geocoding-api.open-meteo.com/v1/search?name=${inputField.value}`;
 	try {
-		inputField.textContent = "...Loading";
 		const response = await fetch(url);
 
 		if (!response.ok) {
 			throw new Error(`Response status: ${response.status}`);
 		}
 		const result = await response.json();
-
 		if (!result.results) {
 			dropdownSuggestionsDiv.textContent = "error! nothing found";
 		}
@@ -105,6 +111,7 @@ function renderData(temperature, weatherCode, weatherCondition, windSpeed) {
 			image.src = "images/rainy.svg";
 			break;
 		default:
+			image.src = "images/progress.svg";
 			console.log("No weather data. ");
 	}
 	//the part where the wind speed is rendered
@@ -129,7 +136,8 @@ function renderData(temperature, weatherCode, weatherCondition, windSpeed) {
 	const temperatureText = document.createElement("span");
 	temperatureText.classList.add("text");
 	temperatureDiv.appendChild(temperatureText);
-	temperatureText.textContent = "Temperature";
+	temperatureText.textContent = "Temp.";
+	loader.classList.add("hidden");
 }
 
 async function getWeatherByCode(code) {
@@ -149,9 +157,9 @@ function createSearchResult(city) {
 	div.appendChild(cityEl);
 	const btn = document.getElementById(`${city.id}`);
 	btn.addEventListener("click", async function () {
-		console.log(city.name, city.country, city.id);
-		await sendAnApiCallForSpecificCity(city.latitude, city.longitude);
+		loader.classList.remove("hidden");
 		dropdownSuggestionsDiv.classList.add("hidden");
+		await sendAnApiCallForSpecificCity(city.latitude, city.longitude);
 		weatherDiv.classList.remove("hidden");
 	});
 }
