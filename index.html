@@ -8,11 +8,19 @@
 		<meta name="description" content="Weather app homepage" />
 		<link rel="stylesheet" href="styles.css" />
 		<link rel="icon" href="images/cloudy.svg" />
+		<link rel="preload" href="images/progress.svg" as="image" />
 		<script type="module" src="script.js" defer></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Bellota:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
 	</head>
 	<body>
-		<main>
-			<h1>Weather App</h1>
+		<main id="main">
+			<h1>Weather app</h1>
+			<image class="loader" id="loader" src="images/progress.svg"></image>
 			<div class="dropdown" id="dropdown">
 				<input
 					autofocus
@@ -21,8 +29,11 @@
 					type="text"
 					placeholder="🔎 Choose your city"
 				/>
+				<div
+					class="dropdown_suggestions_div"
+					id="dropdown_suggestions_div"
+				></div>
 			</div>
-			<button id="search_button">Search</button>
 			<div id="weather_div" class="weather_div">
 				<div id="weather_condition" class="card"></div>
 				<div id="temperature" class="card"></div>

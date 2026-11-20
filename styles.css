@@ -1,10 +1,12 @@
 body,
 html {
-	background: linear-gradient(#e66465, #9198e5);
+	/* background: linear-gradient(#e66465, #9198e5); */
+	background-color: rgb(32, 31, 31);
 	background-repeat: no-repeat;
 	background-size: contain;
-	color: rgb(58, 22, 65);
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	color: #9198e5;
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
+	font-weight: 400;
 	text-align: center;
 	padding: 0;
 	margin: 0;
@@ -15,15 +17,16 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bellota-regular {
+	font-family: "Bellota", system-ui;
+	font-weight: 400;
+	font-style: normal;
 }
 
 h1 {
 	font-size: 3rem;
-}
-
-#weather_img {
-	display: none;
 }
 
 img {
@@ -38,17 +41,7 @@ p {
 footer {
 	position: absolute;
 	bottom: 2vw;
-	left: 40%;
 	font-size: 0.9rem;
-}
-
-/* dropdown */
-.dropdown {
-	background-color: rgba(240, 248, 255, 0);
-	height: auto;
-	width: fit-content;
-	margin: 0;
-	padding: 0;
 }
 
 .input {
@@ -57,27 +50,11 @@ footer {
 	font-size: 2rem;
 	border-radius: 10px;
 	border: 2px solid purple;
-	background-color: rgba(216, 132, 206, 0.289);
+	background-color: #9198e5;
 	cursor: pointer;
-	width: 500px;
+	width: 80vw;
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
 }
-
-button {
-	width: 33vw;
-	font-size: 1.5rem;
-	margin: 2vw;
-	background-color: rgba(216, 132, 206, 0.738);
-	border: 2px solid purple;
-	color: rgb(37, 33, 33);
-	padding: 20px;
-	border-radius: 10px;
-	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* button:hover {
-	background-color: rgba(213, 119, 202, 0.918);
-	font-size: 1.7rem;
-} */
 
 .input::placeholder {
 	color: rgb(107, 97, 97);
@@ -96,23 +73,6 @@ button {
 	border-radius: 0 0 10px 10px;
 }
 
-ul {
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	color: blargb(29, 28, 28);
-}
-
-li {
-	color: rgb(36, 35, 34);
-	font-size: 2rem;
-	padding: 1vw;
-}
-
-li:hover {
-	background-color: rgba(156, 58, 236, 0.498);
-}
-
 #text,
 #short_description {
 	font-size: 1rem;
@@ -124,6 +84,7 @@ li:hover {
 	justify-content: space-between;
 	gap: 4vw;
 	color: rgb(46, 44, 68);
+	margin: 2vw;
 }
 
 .card {
@@ -133,25 +94,24 @@ li:hover {
 	width: 20vw;
 	height: 20vw;
 	font-size: 2rem;
-	background-color: #e464e6;
+	background-color: #9198e5;
 	border-radius: 20px;
 	justify-content: center;
 	align-items: center;
 	color: rgb(46, 44, 68);
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
+}
+
+footer {
+	margin-top: 10vw;
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
+}
+.hidden {
+	display: none;
 }
 
 .weather_image {
 	height: 90%;
-}
-
-.text {
-	font-size: 1rem;
-}
-footer {
-	margin-top: 10vw;
-}
-.hidden {
-	display: none;
 }
 
 .wind_info {
@@ -160,4 +120,73 @@ footer {
 
 .temperature_info {
 	font-size: 3.5rem;
+}
+
+.dropdown_suggestions_div {
+	height: fit-content;
+	background-color: #9198e5;
+	border: 1px solid rgb(150, 146, 166);
+	padding: 1vw 0vw;
+	border-radius: 0 0 30px 30px;
+	color: rgb(32, 31, 31);
+	margin: 0;
+	width: 90vw;
+}
+
+.city_button {
+	border: none;
+	padding: 0.4vw;
+	background-color: #e6646400;
+	width: 80%;
+	font-family: "Bellota", system-ui, "Lucida Sans", Verdana, sans-serif;
+}
+
+.city_button:hover {
+	background-color: #e6646460;
+}
+
+.loader {
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	width: 20vw;
+	animation-name: "spinningLoader";
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes spinningLoader {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* mobile */
+@media (max-width: 450px) {
+	.city_button {
+		font-size: 1.5rem;
+	}
+	.weather_image {
+		height: 16vw;
+	}
+
+	.wind_info {
+		font-size: 1rem;
+	}
+
+	.temperature_info {
+		font-size: 1rem;
+	}
+	.text {
+		font-size: 1rem;
+	}
+}
+
+.error-message {
+	font-size: 1rem;
+	color: red;
 }

@@ -1,84 +1,84 @@
 # Weather App
 
-A small browser app that displays the current temperature and cloud cover for a
-city selected from a preset list. Weather data comes from the free
-[Open-Meteo API](https://open-meteo.com/).
+A browser-based weather app. Enter a city name to look up its current weather
+using the [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api)
+and [Forecast API](https://open-meteo.com/en/docs).
 
 ## Features
 
-- Select from Stockholm, Dubai, Tokyo, New York, London, and Los Angeles.
-- View the current temperature in Celsius and cloud cover as a percentage.
-- See a short description based on temperature and cloud cover.
-- No API key, build tools, or third-party dependencies are needed.
+- Looks up a city by name and uses the first geocoding result.
+- Displays the current weather condition, rounded temperature in Celsius, and
+  rounded wind speed in meters per second.
+- Includes cloud cover, weather description, and the entered city name in a
+  summary sentence.
+- Shows a weather icon for clear, mainly clear, partly cloudy, overcast, and
+  light drizzle conditions.
+- Uses the Open-Meteo APIs without an API key or third-party dependencies.
 
-## Tech Stack
+## Getting Started
 
-- **HTML5** for the page structure (`index.html`)
-- **CSS3** for styling (`styles.css`)
-- **Vanilla JavaScript** for city selection, fetching, and rendering (`script.js`)
-- **Open-Meteo Forecast API** for current weather conditions
+You need a modern browser and an internet connection. Serve the project over
+HTTP so the browser can load the JavaScript module and `codes.json`.
+
+```bash
+git clone https://github.com/filisa/weather_app.git
+cd weather_app
+python3 -m http.server 8000
+```
+
+Then open <http://localhost:8000>.
+
+You can also use the VS Code **Live Server** extension.
+
+## Using the App
+
+Type a city name into the input field. The app starts looking up the city as the
+input changes, then requests its current weather and displays the results.
 
 ## Project Structure
 
 ```
 weather_app/
 ├── images/
-│   ├── cloudy.svg      # Favicon and weather image
-│   └── search.svg      # Search icon used in the city selector
-├── data.js             # City names and coordinates
-├── index.html          # Main page
-├── script.js           # City selector and weather requests
-└── styles.css          # App styling
+│   ├── cloudy.svg
+│   ├── partly_cloudy_day.svg
+│   ├── rainy.svg
+│   ├── search.svg
+│   ├── snow.png
+│   ├── sun.svg
+│   └── thunder.svg
+├── codes.json    # Weather-code descriptions
+├── index.html    # App page
+├── script.js     # City lookup, weather requests, and rendering
+└── styles.css    # App styling
 ```
-
-## Getting Started
-
-You need a modern web browser and an internet connection. Because the app uses
-JavaScript modules, run it from a local web server rather than opening
-`index.html` directly.
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/filisa/weather_app.git
-   cd weather_app
-   ```
-2. Start a local server:
-   ```bash
-   python3 -m http.server 8000
-   ```
-   Or use the VS Code **Live Server** extension.
-3. Open `http://localhost:8000` in your browser.
 
 ## How It Works
 
-1. Click the city selector to show the preset cities.
-2. Select a city. Its coordinates are read from `data.js` and used to request
-   current temperature and cloud cover from Open-Meteo.
-3. The app displays the reading and derives a short description from these
-   thresholds:
-   - **Temperature:** Frost at 0°C or below; It's cold above 0°C through 15°C;
-     It's lagom above 15°C and below 25°C; It's warm from 25°C to below 35°C;
-     It's way too hot at 35°C or above.
-   - **Cloud cover:** Clear below 30%; Partially cloudy from 30% to below 70%;
-     Cloudy at 70% or above.
-
-The API request uses the `metno_seamless` model and requests current
-`temperature_2m` and `cloud_cover` values. If a request fails, the error is
-logged to the browser console.
+1. On input, `script.js` sends the entered city name to the Open-Meteo
+   Geocoding API and uses the first result's coordinates.
+2. It requests current temperature, cloud cover, wind speed, and weather code
+   from the Open-Meteo Forecast API using the `metno_seamless` model.
+3. Weather-code descriptions are loaded from `codes.json`. The page displays
+   the condition, temperature, wind speed, and a summary sentence.
 
 ## Known Limitations
 
-- The city list is fixed in `data.js`; the selector does not search for arbitrary
-  cities.
-- Request errors are only logged in the browser console and are not shown in
-  the page.
-- The weather image is currently hidden by the stylesheet.
+- A lookup runs on each input change rather than when the **Search** button is
+  clicked.
+- Only the first geocoding result is used; there is no city-results list for
+  choosing between places with the same name.
+- The weather icon is mapped only for codes 0, 1, 2, 3, and 51. Other
+  conditions can still have a text description but may not have an icon.
+- Request and lookup errors are logged to the browser console rather than
+  displayed on the page.
 
 ## Credits
 
 - Weather data by [Open-Meteo](https://open-meteo.com/) (CC BY 4.0)
 - Created by [Margarita (filisa)](https://github.com/filisa)
 
-## License
+## Data License
 
-https://creativecommons.org/licenses/by-nc/4.0/
+Open-Meteo data is licensed under
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/).
