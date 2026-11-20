@@ -62,7 +62,8 @@ footer {
 	width: 500px;
 }
 
-button {
+#search_button {
+	display: none;
 	width: 33vw;
 	font-size: 1.5rem;
 	margin: 2vw;
@@ -124,6 +125,7 @@ li:hover {
 	justify-content: space-between;
 	gap: 4vw;
 	color: rgb(46, 44, 68);
+	margin: 2vw;
 }
 
 .card {
@@ -160,4 +162,24 @@ footer {
 
 .temperature_info {
 	font-size: 3.5rem;
+}
+
+.dropdown_suggestions_div {
+	height: fit-content;
+	background-color: #9198e5;
+	border: 1px solid rgb(150, 146, 166);
+	padding: 2vw 0vw;
+	border-radius: 0 0 30px 30px;
+}
+
+.city_button {
+	border: none;
+	font-size: 2rem;
+	padding: 1vw;
+	background-color: #e6646400;
+	width: 100%;
+}
+
+.city_button:hover {
+	background-color: #e6646460;
 }
